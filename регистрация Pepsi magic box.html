@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация Pepsi Magic Box</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: #ffffff;
+            color: #333;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            color: #004b93;
+        }
+
+        .logo {
+            max-width: 280px;
+            width: 90%;
+            height: auto;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            animation: logoGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes logoGlow {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(138, 43, 226, 0.6)); }
+            50% { filter: drop-shadow(0 0 30px rgba(0, 191, 255, 0.8)); }
+        }
+
+        .content {
+            padding: 25px 20px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            background: linear-gradient(90deg, #e30613, #ff3344);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(227, 6, 19, 0.3);
+        }
+
+        .hint-box {
+            background: linear-gradient(135deg, #fff9e6, #fff3cd);
+            border-left: 4px solid #ffc107;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95em;
+            color: #856404;
+            box-shadow: 0 2px 8px rgba(255, 193, 7, 0.2);
+        }
+
+        .hint-icon {
+            font-size: 1.5em;
+            animation: pulse-hint 2s infinite;
+        }
+
+        @keyframes pulse-hint {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .step {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-left: 4px solid #0066cc;
+            padding: 15px 18px;
+            margin-bottom: 12px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(0, 102, 204, 0.2);
+            border-left-color: #e30613;
+        }
+
+        .step-clickable {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-left: 4px solid #0066cc;
+            padding: 15px 18px;
+            margin-bottom: 12px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .step-clickable:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(0, 102, 204, 0.3);
+            border-left-color: #e30613;
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+        }
+
+        .step-with-image {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-left: 4px solid #0066cc;
+            padding: 15px 18px;
+            margin-bottom: 12px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .step-with-image:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(0, 102, 204, 0.3);
+            border-left-color: #e30613;
+        }
+
+        .step-with-image::after {
+            content: '🖼️';
+            position: absolute;
+            right: 15px;
+            font-size: 1.2em;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #0066cc, #004b93);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-right: 15px;
+            flex-shrink: 0;
+            box-shadow: 0 3px 10px rgba(0, 102, 204, 0.4);
+        }
+
+        .step-content {
+            flex: 1;
+            font-size: 1em;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .bot-link-inline {
+            color: #0066cc;
+            font-weight: bold;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #004b93, #0066cc);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 1em;
+        }
+
+        .success-icon {
+            display: inline-block;
+            margin: 0 5px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            position: relative;
+            margin: auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 800px;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+        }
+
+        .modal-title {
+            color: white;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 70vh;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            touch-action: pan-y;
+        }
+
+        .image-container {
+            position: relative;
+            overflow-y: auto;
+            max-height: 75vh;
+            scroll-behavior: smooth;
+        }
+
+        .swipe-hint {
+            color: white;
+            font-size: 0.9em;
+            margin-top: 15px;
+            opacity: 0.7;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            color: #ffffff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 1001;
+        }
+
+        .close:hover {
+            color: #e30613;
+        }
+
+        .image-gallery {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .image-gallery img {
+            max-width: 30%;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .image-gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+
+            .container {
+                border-radius: 20px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            }
+
+            .header {
+                padding: 20px 15px;
+            }
+
+            .header h1 {
+                font-size: 1.4em;
+            }
+            
+            .logo {
+                max-width: 220px;
+            }
+
+            .content {
+                padding: 20px 15px;
+            }
+            
+            .section {
+                margin-bottom: 25px;
+            }
+
+            .section-title {
+                font-size: 1.05em;
+                padding: 10px 15px;
+            }
+
+            .hint-box {
+                font-size: 0.85em;
+                padding: 10px 12px;
+                margin-bottom: 15px;
+            }
+
+            .hint-icon {
+                font-size: 1.3em;
+            }
+            
+            .step, .step-clickable, .step-with-image {
+                padding: 12px 12px;
+                margin-bottom: 10px;
+            }
+            
+            .step-number {
+                width: 35px;
+                height: 35px;
+                font-size: 0.95em;
+                margin-right: 10px;
+            }
+            
+            .step-content {
+                font-size: 0.9em;
+            }
+
+            .step-with-image::after {
+                font-size: 1em;
+                right: 10px;
+            }
+
+            .footer {
+                padding: 15px;
+                font-size: 0.95em;
+            }
+
+            .modal-content {
+                padding: 5px;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .modal-title {
+                font-size: 1.1em;
+                margin-bottom: 15px;
+                padding: 0 10px;
+            }
+
+            .modal-content img {
+                max-height: 85vh;
+                max-width: 100%;
+                width: auto;
+            }
+
+            .image-container {
+                max-height: 90vh;
+                padding: 0 5px;
+            }
+
+            .swipe-hint {
+                font-size: 0.85em;
+                margin-top: 10px;
+                padding: 0 10px;
+            }
+
+            .close {
+                font-size: 40px;
+                right: 10px;
+                top: 10px;
+            }
+
+            .image-gallery {
+                gap: 8px;
+            }
+
+            .image-gallery img {
+                max-width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.2em;
+            }
+
+            .logo {
+                max-width: 180px;
+            }
+
+            .section-title {
+                font-size: 0.95em;
+                padding: 8px 12px;
+            }
+
+            .hint-box {
+                font-size: 0.8em;
+                padding: 8px 10px;
+                margin-bottom: 12px;
+            }
+
+            .hint-icon {
+                font-size: 1.2em;
+            }
+
+            .step, .step-clickable, .step-with-image {
+                padding: 10px 10px;
+            }
+
+            .step-number {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9em;
+                margin-right: 8px;
+            }
+
+            .step-content {
+                font-size: 0.85em;
+                line-height: 1.4;
+            }
+
+            .step-with-image::after {
+                font-size: 0.9em;
+                right: 8px;
+            }
+
+            .modal-content {
+                padding: 3px;
+            }
+
+            .modal-title {
+                font-size: 1em;
+                margin-bottom: 10px;
+                padding: 0 8px;
+            }
+
+            .modal-content img {
+                max-height: 88vh;
+            }
+
+            .image-container {
+                max-height: 92vh;
+                padding: 0 3px;
+            }
+
+            .swipe-hint {
+                font-size: 0.8em;
+                padding: 0 8px;
+            }
+
+            .close {
+                font-size: 35px;
+                right: 8px;
+                top: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://i.postimg.cc/fTwQYCks/pepsi-magic-1-(1).png" alt="Pepsi Magic Box" class="logo">
+            <h1>Инструкция по регистрации</h1>
+        </div>
+
+        <div class="content">
+            <div class="hint-box">
+                <span class="hint-icon">💡</span>
+                <span><strong>Подсказка:</strong> Нажмите на шаг со значком 🖼️ чтобы увидеть скриншот с инструкцией</span>
+            </div>
+
+            <div class="section">
+                <div class="section-title">📱 Регистрация в Telegram</div>
+                
+                <div class="step-clickable" onclick="window.open('https://t.me/trade_promo_bot', '_blank')">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        Откройте Telegram-бота <span class="bot-link-inline">@trade_promo_bot</span>
+                    </div>
+                </div>
+
+                <div class="step-with-image" onclick="openImage('https://i.postimg.cc/v8NYT9gL/Group-1.png')">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        Нажмите кнопку "СТАРТ"
+                    </div>
+                </div>
+
+                <div class="step-with-image" onclick="openImage('https://i.postimg.cc/5t4dnNQq/Group-2.png')">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        Поделитесь своим контактом
+                    </div>
+                </div>
+
+                <div class="step-with-image" onclick="openImage('https://i.postimg.cc/FFMKG3rh/Group-3.png')">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        Введите ИНН
+                    </div>
+                </div>
+
+                <div class="step-with-image" onclick="openImage('https://i.postimg.cc/L8R8FSZh/Group-4.png')">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        Если данные номера телефона и ИНН совпадают, нажмите на кнопку <strong>Ha, tog'ri</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">🌐 Регистрация в Портале</div>
+                
+                <div class="step-with-image" onclick="openImage('https://i.postimg.cc/C1fgfrqy/Group-5.png')">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        Для входа в портал нажмите <strong>Ochiq portal</strong>
+                    </div>
+                </div>
+
+                <div class="step-with-image" onclick="openImage('https://i.postimg.cc/vZpXZPMJ/Group-7.png')">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        Введите номер телефона и ИНН (или ПИНФЛ)
+                    </div>
+                </div>
+
+                <div class="step-with-image" onclick="openGallery()">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        Сверните окно (нажмите стрелку вниз в правом верхнем углу), подтвердите вход (нажмите <strong>Tasdiqlash</strong>), вернитесь в свёрнутое окно (нажмите на стрелку вверх в правом нижнем углу)
+                    </div>
+                </div>
+
+                <div class="step-with-image" onclick="openImage('https://i.postimg.cc/FKNdpcxJ/Group-11.png')">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        Вы зарегистрированы на платформе и у вас есть к ней доступ
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span class="success-icon">✨</span>
+            Успешной регистрации!
+            <span class="success-icon">✨</span>
+        </div>
+    </div>
+
+    <!-- Modal для отображения изображений -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-title" id="modalTitle"></div>
+            <div class="image-container" id="modalImageContainer"></div>
+            <div class="swipe-hint">Пролистывайте вверх/вниз для просмотра</div>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('imageModal');
+        
+        const imageData = {
+            telegram: [
+                { src: 'https://i.postimg.cc/v8NYT9gL/Group-1.png', title: 'Шаг 2: Нажмите кнопку "СТАРТ"' },
+                { src: 'https://i.postimg.cc/5t4dnNQq/Group-2.png', title: 'Шаг 3: Поделитесь своим контактом' },
+                { src: 'https://i.postimg.cc/FFMKG3rh/Group-3.png', title: 'Шаг 4: Введите ИНН' },
+                { src: 'https://i.postimg.cc/L8R8FSZh/Group-4.png', title: 'Шаг 5: Подтвердите информацию' }
+            ],
+            portal: [
+                { src: 'https://i.postimg.cc/C1fgfrqy/Group-5.png', title: 'Шаг 1: Нажмите Ochiq portal' },
+                { src: 'https://i.postimg.cc/vZpXZPMJ/Group-7.png', title: 'Шаг 2: Введите телефон и ИНН' },
+                { src: 'https://i.postimg.cc/V6zqJpTP/Group-8.png', title: 'Шаг 3.1: Сверните окно' },
+                { src: 'https://i.postimg.cc/9FDGwGxG/Group-9.png', title: 'Шаг 3.2: Подтвердите вход' },
+                { src: 'https://i.postimg.cc/C5zfDgsC/Group-10.png', title: 'Шаг 3.3: Вернитесь в окно' },
+                { src: 'https://i.postimg.cc/FKNdpcxJ/Group-11.png', title: 'Шаг 4: Регистрация завершена' }
+            ]
+        };
+
+        function openImage(src) {
+            // Определяем к какой категории относится изображение
+            let category = null;
+            let images = [];
+            
+            for (let cat in imageData) {
+                const found = imageData[cat].find(img => img.src === src);
+                if (found) {
+                    category = cat;
+                    images = imageData[cat];
+                    break;
+                }
+            }
+            
+            if (!images.length) return;
+            
+            const container = document.getElementById('modalImageContainer');
+            let html = '';
+            
+            images.forEach(function(img) {
+                html += '<div style="margin-bottom: 30px;">';
+                html += '<div style="color: white; font-size: 1.2em; font-weight: bold; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">' + img.title + '</div>';
+                html += '<img src="' + img.src + '" alt="' + img.title + '">';
+                html += '</div>';
+            });
+            
+            container.innerHTML = html;
+            
+            // Прокрутка к выбранному изображению
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            setTimeout(function() {
+                const allImages = container.querySelectorAll('img');
+                const targetIndex = images.findIndex(img => img.src === src);
+                if (targetIndex >= 0 && allImages[targetIndex]) {
+                    allImages[targetIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 100);
+        }
+
+        function openGallery() {
+            openImage('https://i.postimg.cc/V6zqJpTP/Group-8.png');
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Закрытие по клику на фон
+        modal.onclick = function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Закрытие по клавише Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
